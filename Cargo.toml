@@ -1,0 +1,334 @@
+[package]
+name = "hello-cargo"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+
+////////////////////////////////////
+////////////////////////////////////
+
+Definición de colecciones de datos mediante tuplas y estructuras
+200 XP
+6 minutos
+En esta unidad, se explorarán dos tipos de datos que son útiles para trabajar con colecciones de datos o datos compuestos: tuplas y estructuras.
+
+Tuplas
+Una tupla es una agrupación de valores de distintos tipos recopilados en un valor compuesto. Los valores individuales de una tupla se denominan elementos. Los valores se especifican como una lista separada por comas entre paréntesis (<value>, <value>, ...).
+
+Una tupla tiene una longitud fija, que es igual a su número de elementos. Una vez declarada una tupla, no puede aumentar ni reducir su tamaño. No se pueden agregar ni quitar elementos. El tipo de datos de una tupla se define mediante la secuencia de los tipos de datos de los elementos.
+
+Definición de una tupla
+Este es un ejemplo de una tupla con tres elementos:
+
+Rust
+
+Copiar
+// Tuple of length 3
+let tuple_e = ('E', 5i32, true);
+En la tabla siguiente se muestra el índice, el valor y el tipo de datos de cada elemento de la tupla:
+
+Elemento	Value	Tipo de datos
+0	E	char
+1	5	i32
+2	true	bool
+La firma de tipo de esta tupla se define mediante la secuencia de los tipos de los tres elementos: (char, i32, bool).
+
+Acceso a elementos de una tupla
+Se puede acceder a los elementos de una tupla por la posición del índice, a partir de cero. Este proceso se conoce como indexación de tupla. Para acceder a un elemento de una tupla, usamos la sintaxis <tuple>.<index>.
+
+En el ejemplo siguiente se muestra cómo acceder a los elementos de la tupla usando la indexación:
+
+Rust
+
+Copiar
+// Declare a tuple of three elements
+let tuple_e = ('E', 5i32, true);
+
+// Use tuple indexing and show the values of the elements in the tuple
+println!("Is '{}' the {}th letter of the alphabet? {}", tuple_e.0, tuple_e.1, tuple_e.2);
+En el ejemplo se muestra la salida siguiente:
+
+Output
+
+Copiar
+Is 'E' the 5th letter of the alphabet? true
+Este ejemplo se puede explorar en el Área de juegos de Rust.
+
+Las tuplas resultan útiles cuando se quieren combinar tipos distintos en un único valor. Las funciones pueden utilizar tuplas para devolver varios valores porque las tuplas pueden contener cualquier número de valores.
+
+Estructuras
+Una estructura es un tipo compuesto por otros tipos. Los elementos de una estructura se denominan campos. Al igual que las tuplas, los campos de una estructura pueden tener tipos de datos diferentes. Una ventaja importante del tipo de estructura es que puede asignar un nombre a cada campo, por lo que queda claro lo que significa el valor.
+
+Para trabajar con estructuras en un programa con Rust, en primer lugar debe definir la estructura por nombre y especificar el tipo de datos de cada campo. Después, debe crear una instancia de la estructura con otro nombre. Al declarar la instancia, se proporcionan los valores específicos para los campos.
+
+Rust admite tres tipos de estructura: clásicas, de tupla y de unidad. Estos tipos de estructura admiten diferentes maneras de agrupar y trabajar con los datos.
+
+Las estructuras de C clásicas son las más utilizadas. Cada campo de la estructura tiene un nombre y un tipo de datos. Una vez definida una estructura clásica, se puede acceder a los campos de la estructura usando la sintaxis <struct>.<field>.
+Las estructuras de tupla son parecidas a las clásicas, pero sus campos no tienen nombres. A fin de acceder a los campos de una estructura de tupla, usamos la misma sintaxis que para indexar una tupla: <tuple>.<index>. Al igual que con las tuplas, los valores de índice de la estructura de tupla empiezan por cero.
+Las estructuras de unidad suelen usarse como marcadores. Obtendremos más información sobre por qué las estructuras pueden resultar útiles cuando descubramos la característica rasgos de Rust.
+En el código siguiente se muestran definiciones de ejemplo para las tres variedades de tipos de estructura:
+
+Rust
+
+Copiar
+// Classic struct with named fields
+struct Student { name: String, level: u8, remote: bool }
+
+// Tuple struct with data types only
+struct Grades(char, char, char, char, f32);
+
+// Unit struct
+struct Unit;
+Definición de una estructura
+Para definir una estructura, se escribe la palabra clave struct seguida de un nombre de la estructura. Elija un nombre para el tipo de estructura que describa la característica significativa de los datos agrupados. A diferencia de la convención de nomenclatura que hemos usado hasta ahora, el nombre de un tipo de estructura se escribe en mayúsculas.
+
+Los tipos de estructura se definen a menudo fuera de la función main y de otras funciones en el programa con Rust. Por este motivo, al inicio de la definición de la estructura no se le aplica sangría desde el margen izquierdo. Solo se le aplica sangría a la parte interna de la definición para mostrar cómo se organizan los datos.
+
+Estructura clásica
+Al igual que una función, el cuerpo de una estructura clásica se define entre llaves {}. A cada campo de la estructura clásica se le asigna un nombre único dentro de la estructura. El tipo de cada campo se especifica con la sintaxis : <type>. Los campos de la estructura clásica se especifican como una lista separada por comas <field>, <field>, .... Una definición de estructura clásica no termina con un punto y coma.
+
+Rust
+
+Copiar
+// Classic struct with named fields
+struct Student { name: String, level: u8, remote: bool }
+Una ventaja de la definición de estructura clásica es que se puede acceder al valor de un campo de estructura por el nombre. Para acceder al valor de campo, usamos la sintaxis <struct>.<field>.
+
+Estructura de tupla
+Al igual que una tupla, el cuerpo de una estructura de tupla se define entre paréntesis (). Los paréntesis van inmediatamente después del nombre de la estructura. No hay espacio entre el nombre de la estructura y el paréntesis de apertura.
+
+A diferencia de una tupla, la definición de estructura de tupla incluye solo el tipo de datos de cada campo. Los tipos de datos de la estructura de tupla se especifican como una lista separada por comas <type>, <type>, ....
+
+Rust
+
+Copiar
+// Tuple struct with data types only
+struct Grades(char, char, char, char, f32);
+Creación de una instancia de una estructura
+Después de definir un tipo de estructura, para usar la estructura se crea una instancia del tipo y se especifican valores para cada campo. Al establecer los valores de campo, no es necesario especificar los campos con el mismo orden con el que están definidos.
+
+En el ejemplo siguiente se usan las definiciones que hemos creado para los tipos de estructura Student y Grades.
+
+Rust
+
+Copiar
+// Instantiate classic struct, specify fields in random order, or in specified order
+let user_1 = Student { name: String::from("Constance Sharma"), remote: true, level: 2 };
+let user_2 = Student { name: String::from("Dyson Tan"), level: 5, remote: false };
+
+// Instantiate tuple structs, pass values in same order as types defined
+let mark_1 = Grades('A', 'A', 'B', 'A', 3.75);
+let mark_2 = Grades('B', 'A', 'A', 'C', 3.25);
+
+println!("{}, level {}. Remote: {}. Grades: {}, {}, {}, {}. Average: {}", 
+         user_1.name, user_1.level, user_1.remote, mark_1.0, mark_1.1, mark_1.2, mark_1.3, mark_1.4);
+println!("{}, level {}. Remote: {}. Grades: {}, {}, {}, {}. Average: {}", 
+         user_2.name, user_2.level, user_2.remote, mark_2.0, mark_2.1, mark_2.2, mark_2.3, mark_2.4);
+Conversión de un literal de cadena en un tipo String
+Los datos de cadena que se almacenan dentro de otra estructura de datos, como una estructura o un vector, se deben convertir de una referencia literal de cadena (&str) a un tipo String. Para realizar la conversión, se usa el método String::from(&str) estándar. Observe cómo se usa este método en este ejemplo:
+
+Rust
+
+Copiar
+// Classic struct with named fields
+struct Student { name: String, level: u8, remote: bool }
+...
+let user_2 = Student { name: String::from("Dyson Tan"), level: 5, remote: false };
+Si no se convierte el tipo antes de asignar el valor, el compilador emite un error:
+
+Output
+
+Copiar
+error[E0308]: mismatched types
+  --> src/main.rs:24:15
+   |
+24 |         name: "Dyson Tan",
+   |               ^^^^^^^^^^^
+   |               |
+   |               expected struct `String`, found `&str`
+   |               help: try using a conversion method: `"Dyson Tan".to_string()`
+
+error: aborting due to previous error
+El compilador sugiere que se puede usar la función .to_string() para realizar la conversión. En los ejemplos, se usa el método String::from(&str).
+
+
+Comprobación de conocimientos
+Responda a las preguntas siguientes para ver lo que ha aprendido. Elija una respuesta para cada pregunta y, después, seleccione Comprobar las respuestas.
+
+￼
+1. ¿Qué es tuple en Rust? 
+￼
+Una tupla es una colección de valores de diferentes tipos. El tipo de datos se basa en los tipos de datos de sus elementos y la longitud se fija en función del número de elementos.
+Correcto. Una tupla es una agrupación de valores de distintos tipos de datos recopilados en un valor compuesto.
+
+￼
+Una tupla es una colección de valores de diferentes tipos. El tipo de datos se basa en los tipos de datos de sus elementos. La longitud puede aumentar y reducirse a medida que se agregan o se quitan elementos.
+￼
+Una tupla es una colección de valores del mismo tipo de datos. Todos los elementos de la tupla deben tener el mismo tipo de datos. La longitud de la tupla se fija en función del número de sus elementos.
+2. ¿Cuál es la principal diferencia entre una estructura clásica y una estructura de tupla en Rust? 
+￼
+Todos los campos de una estructura clásica deben ser del mismo tipo de datos. Los campos de una estructura de tupla pueden ser tipos de datos diferentes.
+￼
+Se puede acceder a los valores de una estructura de tupla mediante la indexación. Solo se puede acceder a los valores de una estructura clásica por nombre de campo.
+￼
+Cada campo de una estructura clásica tiene un nombre y un tipo de datos. Los campos de una estructura de tupla no tienen nombres.
+Correcto. Cada campo de una estructura clásica tiene un nombre y un tipo de datos. Los campos de una estructura de tupla no tienen nombres.
+
+
+
+
+////////////////////////////////////
+////////////////////////////////////
+
+Uso de variantes de enumeración para datos compuestos
+Completado
+200 XP
+5 minutos
+Las enumeraciones son tipos que pueden ser una de varias variantes. Lo que Rust denomina enumeraciones se conocen habitualmente como tipos de datos algebraicos. Lo importante es que cada variante de enumeración puede tener datos asociados.
+
+Usamos la palabra clave enum para crear un tipo de enumeración, que puede tener cualquier combinación de las variantes de enumeración. Las variantes de enumeración, al igual que las estructuras, pueden tener campos con nombres, pero también los pueden tener sin nombres, o bien no tener ningún campo. Al igual que los tipos de estructura, los tipos de enumeración también se ponen en mayúsculas.
+
+Definición de una enumeración
+En el ejemplo siguiente, se define una enumeración para clasificar un evento web. Cada variante de la enumeración es independiente y almacena diferentes cantidades y tipos de valores.
+
+Rust
+￼
+Copiar
+enum WebEvent {
+    // An enum variant can be like a unit struct without fields or data types
+    WELoad,
+    // An enum variant can be like a tuple struct with data types but no named fields
+    WEKeys(String, char),
+    // An enum variant can be like a classic struct with named fields and their data types
+    WEClick { x: i64, y: i64 }
+}
+La enumeración de nuestro ejemplo tiene tres variantes de tipos diferentes:
+
+WELoad no tiene ningún tipo de datos o datos asociados.
+WEKeys tiene dos campos, con tipos de datos String y char.
+WEMClick incluye una estructura anónima con campos con nombre x y y, y sus tipos de datos (i64).
+Definimos una enumeración con variantes parecidas a la forma en que definimos diferentes clases de tipos de estructura. Todas las variantes se agrupan en el mismo tipo de enumeración WebEvent. Cada variante de la enumeración no es su propio tipo. Cualquier función que use una variante de la enumeración WebEvent debe aceptar todas las variantes de esta. No podemos tener una función que acepte solo la variante WEClick, pero no las demás.
+
+Definición de una enumeración con estructuras
+Una manera de evitar los requisitos de variante de la enumeración es definir una estructura independiente para cada variante de esta. Después, cada variante de la enumeración usa la estructura correspondiente. La estructura contiene los mismos datos que tenía la variante de enumeración correspondiente. Este estilo de definición nos permite hacer referencia a cada variante lógica por sí misma.
+
+En el código siguiente se muestra cómo utilizar este estilo de definición alternativo. Las estructuras se definen para contener los datos. Las variantes de la enumeración se definen para hacer referencia a las estructuras.
+
+Rust
+￼
+Copiar
+// Define a tuple struct
+struct KeyPress(String, char);
+
+// Define a classic struct
+struct MouseClick { x: i64, y: i64 }
+
+// Redefine the enum variants to use the data from the new structs
+// Update the page Load variant to have the boolean type
+enum WebEvent { WELoad(bool), WEClick(MouseClick), WEKeys(KeyPress) }
+Creación de una instancia de una enumeración
+Ahora vamos a agregar código para crear instancias de nuestras variantes de enumeración. Para cada variante, usamos la palabra clave let a fin de realizar la asignación. Para acceder a la variante específica en la definición de enumeración, usamos la sintaxis <enum>::<variant> con dos puntos dobles ::.
+
+Variante simple: WELoad(bool)
+La primera variante de la enumeración WebEvent tiene un único valor booleano, WELoad(bool). Creamos una instancia de esta variante de forma parecida a como hemos trabajado con los valores booleanos de la unidad anterior:
+
+Rust
+￼
+Copiar
+let we_load = WebEvent::WELoad(true);
+Variante de estructura: WEClick(MouseClick)
+La segunda variante incluye una estructura clásica WEClick(MouseClick). La estructura tiene dos campos con nombre x y y, y ambos campos tienen el tipo de datos i64. Para crear esta variante, en primer lugar creamos una instancia de la estructura. Después, pasamos la estructura como argumento en la llamada para crear una instancia de la variante.
+
+Rust
+￼
+Copiar
+// Instantiate a MouseClick struct and bind the coordinate values
+let click = MouseClick { x: 100, y: 250 };
+
+// Set the WEClick variant to use the data in the click struct
+let we_click = WebEvent::WEClick(click);
+Variante de tupla: WEKeys(KeyPress)
+La última variante incluye una tupla WEKeys(KeyPress). La tupla tiene dos campos que usan los tipos de datos String y char. Para crear esta variante, primero creamos una instancia de la tupla. Después, pasamos la tupla como argumento en la llamada para crear una instancia de la variante.
+
+Rust
+￼
+Copiar
+// Instantiate a KeyPress tuple and bind the key values
+let keys = KeyPress(String::from("Ctrl+"), 'N');
+    
+// Set the WEKeys variant to use the data in the keys tuple
+let we_key = WebEvent::WEKeys(keys);
+Observe que usamos la sintaxis String::from("<value>") en este fragmento de código. Esta sintaxis crea un valor de tipo String llamando al método from de Rust. El método espera un argumento de entrada de datos entre comillas dobles.
+
+Ejemplo de enumeraciones
+Este es el código final para crear una instancia de las variantes de enumeración:
+
+Rust
+￼
+Copiar
+// Define a tuple struct
+#[derive(Debug)]
+struct KeyPress(String, char);
+
+// Define a classic struct
+#[derive(Debug)]
+struct MouseClick { x: i64, y: i64 }
+
+// Define the WebEvent enum variants to use the data from the structs
+// and a boolean type for the page Load variant
+#[derive(Debug)]
+enum WebEvent { WELoad(bool), WEClick(MouseClick), WEKeys(KeyPress) }
+
+fn main() {
+    // Instantiate a MouseClick struct and bind the coordinate values
+    let click = MouseClick { x: 100, y: 250 };
+    println!("Mouse click location: {}, {}", click.x, click.y);
+        
+    // Instantiate a KeyPress tuple and bind the key values
+    let keys = KeyPress(String::from("Ctrl+"), 'N');
+    println!("\nKeys pressed: {}{}", keys.0, keys.1);
+        
+    // Instantiate WebEvent enum variants
+    // Set the boolean page Load value to true
+    let we_load = WebEvent::WELoad(true);
+    // Set the WEClick variant to use the data in the click struct
+    let we_click = WebEvent::WEClick(click);
+    // Set the WEKeys variant to use the data in the keys tuple
+    let we_key = WebEvent::WEKeys(keys);
+        
+    // Print the values in the WebEvent enum variants
+    // Use the {:#?} syntax to display the enum structure and data in a readable form
+    println!("\nWebEvent enum structure: \n\n {:#?} \n\n {:#?} \n\n {:#?}", we_load, we_click, we_key);
+}
+Intente interactuar con este código de ejemplo en el Área de juegos de Rust.
+
+Instrucciones de depuración
+En el ejemplo anterior, busque la siguiente instrucción de código. Esta instrucción se usa en varios lugares del código.
+
+Rust
+￼
+Copiar
+// Set the Debug flag so we can check the data in the output
+#[derive(Debug)]
+La sintaxis #[derive(Debug)] nos permite ver determinados valores durante la ejecución del código que, de lo contrario, no son visibles en la salida estándar. Para ver los datos de depuración con la macro println!, usamos la sintaxis {:#?} a fin de dar formato a los datos de una manera legible.
+
+Comprobación de conocimientos
+Responda a las preguntas siguientes para ver lo que ha aprendido. Elija una respuesta para cada pregunta y, después, seleccione Comprobar las respuestas.
+
+￼
+1. Todas las variantes de una enumeración de Rust se agrupan en el mismo tipo. Las funciones que usan cualquier variante de una enumeración deben aceptar todas sus variantes. ¿Cómo se pueden evitar estos requisitos de la variante de enumeración? 
+￼
+Se define una estructura independiente para cada variante de la enumeración a fin de contener los datos de variante.
+Correcto. Al definir una estructura independiente para cada variante de la enumeración, puede acceder directamente a los datos de una variante específica.
+
+￼
+Se define la enumeración para que solo tenga una variante.
+￼
+Se define la enumeración para usar variantes del mismo tipo.
+
+
+/////////////////////////////////
+/////////////////////////////////
